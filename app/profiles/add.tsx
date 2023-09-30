@@ -1,0 +1,76 @@
+'use client';
+import {SyntheticEvent,useState } from "react";
+// agar bisa melihat perubahan data setelah di submit
+import { useRouter } from "next/navigation";
+
+export default function Add ()  {
+    const [name, setName] = useState("");
+    const [age, setAge] = useState("");
+    const [modal, setModal] = useState(false);
+    const router = useRouter();
+
+    async function handeSubmit(e: SyntheticEvent) {
+        // agar saat submit tidak reload
+        e.preventDefault();
+        await fetch('http://localhost:5000/profiles',{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: name,
+                age: age,
+            })
+        });
+        setName("");
+        setAge("");
+        router.refresh();
+        // tutup modal
+        setModal(false);
+    }
+
+    function handleChange(){
+        setModal(!modal);
+    }
+
+  return (
+    <div>
+
+        <button className="btn" onClick={handleChange}>Add New</button>
+
+    <input type="checkbox" checked={modal} onChange={handleChange} className="modal-toggle" />
+
+      <div className="modal">
+        <div className="modal-box">
+            <h3 className="font-bold text-lg">Add New Data</h3>
+            <form onSubmit={handeSubmit}>
+                <div className="form-control">
+                    <label className="label font-bold">Name</label>
+                    <input 
+                    type="text" 
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="input w-full input-bordered" 
+                    placeholder="Input Name"/>
+                </div>
+                <div className="form-control">
+                    <label className="label font-bold">Age</label>
+                    <input 
+                    type="text" 
+                    value={age}
+                    onChange={(e) => setAge(e.target.value)}
+                    className="input w-full input-bordered" 
+                    placeholder="Input Age"/>
+                </div>
+                <div className="modal-action">
+                    <button type="button" className="btn" onClick={handleChange}>Close</button>
+                    <button type="submit" className="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+
