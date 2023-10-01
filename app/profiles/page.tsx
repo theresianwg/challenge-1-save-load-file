@@ -1,4 +1,6 @@
 import Add from "./add";
+import Delete from "./delete";
+import Edit from "./edit";
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -39,18 +41,20 @@ export default async function ProfileList() {
                     </tr>
                 </thead>
                 <tbody>
-                    
                     {profiles.map((profile, index) => (
                       <tr key={profile.id}> 
                         <td>{index+1}</td>
                         <td>{profile.name}</td>
                         <td>{profile.age}</td>
-                        <td></td>
+                        <td className="flex">
+                            <Edit {...profile} />
+                            <Delete {...profile} />
+                            
+                        </td>
                       </tr>
                     ))}
                     
                 </tbody>
-            
             </table>
         </div>
     )
