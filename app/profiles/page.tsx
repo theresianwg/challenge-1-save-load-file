@@ -46,7 +46,7 @@ export default async function ProfileList() {
                         <td>{index+1}</td>
                         <td>{profile.name}</td>
                         <td>{profile.age}</td>
-                        <td className="flex">
+                        <td className="button-container">
                             <Edit {...profile} />
                             <Delete {...profile} />
                             
