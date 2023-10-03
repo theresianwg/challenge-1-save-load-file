@@ -34,7 +34,7 @@ export default async function ProfileList() {
             <table className="table w-full">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>No</th>
                         <th>Name</th>
                         <th>Age</th>
                         <th>Action</th>
@@ -49,11 +49,9 @@ export default async function ProfileList() {
                         <td className="button-container">
                             <Edit {...profile} />
                             <Delete {...profile} />
-                            
                         </td>
                       </tr>
                     ))}
-                    
                 </tbody>
             </table>
         </div>

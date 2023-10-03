@@ -24,6 +24,11 @@
       "name": "Anna",
       "age": "28",
       "id": 6
+    },
+    {
+      "name": "Jajang",
+      "age": 25,
+      "id": 8
     }
   ]
 }

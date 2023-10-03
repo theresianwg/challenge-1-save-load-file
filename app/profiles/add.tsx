@@ -1,4 +1,5 @@
 'use client';
+// event handling & state
 import {SyntheticEvent,useState } from "react";
 // agar bisa melihat perubahan data setelah di submit
 import { useRouter } from "next/navigation";
@@ -13,7 +14,9 @@ export default function Add ()  {
     async function handleSubmit(e: SyntheticEvent) {
         // agar saat submit tidak reload
         e.preventDefault();
-        setIsMutating(true);
+        // ada proses asinkron pengiriman data ke server
+        setIsMutating(true); 
+        // menambahakan data baru
         await fetch('http://localhost:5000/profiles',{
             method: 'POST',
             headers:{
@@ -29,6 +32,7 @@ export default function Add ()  {
 
         setName("");
         setAge("");
+        // menampilkan data terabru
         router.refresh();
         // tutup modal
         setModal(false);
